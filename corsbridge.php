@@ -2,9 +2,29 @@
 header('Cache-Control: no-cache, private');
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/xml');
-$dbParam = $_REQUEST["db"];
-$path = "./db/".$dbParam."/datatypes.xml";
-$xml = file_get_contents($path);
-echo $xml;
-//echo "<Logs><Log><id>".$_REQUEST["db"]."</id></Log></Logs>";
+//ini_set('display_errors', 0);
+if (!empty($_REQUEST["db"])) {
+    $dbParam = $_REQUEST["db"];
+    if (!empty($_REQUEST["sql"])) {
+        $path = "./db/".$dbParam."/output.xsl";
+    } else {
+        $path = "./db/".$dbParam."/datatypes.xml";
+    }
+    $xml = file_get_contents($path);
+    echo $xml;
+}
+if (!empty($_REQUEST["backend"])) {
+    //throw new Exception();
+    $backend = $_REQUEST["backend"];
+    if ($backend == "php-file") {
+        $phpstring = file_get_contents("./backend/".$backend."/index.php");
+        /* remove <?php and ?> from script */
+        $phpstring = preg_replace ( '/\<\?php/' , '' , $phpstring);        
+        $phpstring = preg_replace ( '/\?\>/' , '' , $phpstring);
+        $phpstring = preg_replace ( '/"data/' , '"backend/php-file/data' , $phpstring);
+        eval($phpstring);
+    } else {
+        include_once("./backend/".$backend."/index.php");
+    }
+}
 ?>
