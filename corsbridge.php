@@ -7,6 +7,11 @@ header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 //"Access-Control-Allow-Methods" : "GET,POST,PUT,DELETE,OPTIONS"
 header('Content-Type: application/xml');
 //ini_set('display_errors', 0);
+if (!empty($_REQUEST["locale"])) {
+    $path = "./locale/".$_REQUEST["locale"].".xml";
+    $xml = file_get_contents($path);
+    echo $xml;    
+}
 if (!empty($_REQUEST["db"])) {
     $dbParam = $_REQUEST["db"];
     if (!empty($_REQUEST["sql"])) {

@@ -5,6 +5,7 @@
         <group>
             <file>file:/C:/xampp/htdocs/websqldesignerserver/db/mysql/output.xsl</file>
             <file>file:/C:/xampp/htdocs/websqldesignerserver/backend/php-mysql/index.php</file>
+            <file>file:/C:/xampp/htdocs/websqldesignerserver/backend/php-file/index.php</file>
             <file>file:/C:/xampp/htdocs/websqldesignerserver/corsbridge.php</file>
         </group>
     </open-files>
